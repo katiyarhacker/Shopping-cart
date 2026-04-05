@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { removeFromCart, increaseQty, decreaseQty } from '../redux/productSlice'
+import { removeFromCart, increaseQty, decreaseQty } from '../redux/cartSlice'
 
 const Cart = () => {
-  const cart = useSelector(state => state.product.products)
+  const cart = useSelector(state => state.cart.cart)
   const dispatch = useDispatch()
 
   return (
@@ -25,7 +25,12 @@ const Cart = () => {
             <div className="flex gap-2 items-center">
               <button onClick={() => dispatch(decreaseQty(item.id))}>-</button>
               <span>{item.quantity}</span>
-              <button onClick={() => dispatch(increaseQty(item.id))}>+</button>
+              <button onClick={() => {
+                    console.log(item.id)
+                     dispatch(increaseQty(item.id))
+                    }}>
+                       +
+                    </button>
             </div>
 
             <button 

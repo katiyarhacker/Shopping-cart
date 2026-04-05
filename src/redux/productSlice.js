@@ -28,6 +28,10 @@ const productSlice = createSlice({
     // ➕ ADD PRODUCT
     addProduct: (state, action) => {
       state.products.push(action.payload);
+      const exist=state.products.find(p=>p.id===action.payload.id);
+      if(!exist){
+        state.products.push(action.payload);
+      }
 
       // 🔥 Save to localStorage
       localStorage.setItem("products", JSON.stringify(state.products));
@@ -53,43 +57,6 @@ const productSlice = createSlice({
       }
 
       localStorage.setItem("products", JSON.stringify(state.products));
-    },
-    addToCart: (state, action) => {
-  const item = state.products.find(i => i.id === action.payload.id)
-
-  if (item) {
-    item.quantity += 1
-  } else {
-    state.products.push({ ...action.payload, quantity: 1 })
-  }
-}, 
-removeFromCart: (state, action) => {
-      state.products = state.products.filter(i => i.id !== action.payload)
-
-      localStorage.setItem("products", JSON.stringify(state.cart))
-    },
-    increaseQty: (state, action) => {
-      const item = state.products.find(i => i.id === action.payload)
-
-      if (item) {
-        item.quantity += 1
-      }
-
-      localStorage.setItem("products", JSON.stringify(state.cart))
-    },
-     decreaseQty: (state, action) => {
-      const item = state.products.find(i => i.id === action.payload)
-
-      if (item) {
-        if (item.quantity > 1) {
-          item.quantity -= 1
-        } else {
-          // 👇 agar quantity 1 hai → remove item
-          state.cart = state.products.filter(i => i.id !== action.payload)
-        }
-      }
-
-      localStorage.setItem("products", JSON.stringify(state.cart))
     }
 
   }

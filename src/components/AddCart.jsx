@@ -11,7 +11,7 @@ const AddCart = () => {
       const dispatch=useDispatch()
 
       const handleSubmit=(e)=>{
-        e.preventDefault()
+        e.preventDefault();
 
         if(!name || !price || !img){
           alert("Fill all fields")
@@ -27,7 +27,10 @@ const AddCart = () => {
         console.log(product)
 
         dispatch(addProduct(product));
-        
+        setName("")
+        setDesc("")
+        setImg("")
+        setPrice("")        
       }
   return (
     <div className='flex  w-[100%] h-[100%] justify-center mt-3'>
